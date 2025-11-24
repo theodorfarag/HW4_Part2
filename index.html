@@ -1,0 +1,87 @@
+<!--
+    Author: Theodor Farag
+    Username: theodorfarag
+    Contact: theodor_farag@student.uml.edu
+    Date: 2025-10-11
+-->
+<!--
+                SOURCES:
+                This component utilizes Bootstrap for responsive design and styling.
+                For more information on Bootstrap, visit: https://getbootstrap.com/
+        -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HW4</title>
+    <!-- Bootstrap CSS for layout and components -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Project stylesheet (colors, sticky headers, utilities) -->
+    <link rel="stylesheet" href="./style.css">
+    <!-- End head -->
+</head>
+<body>
+    <!-- Page header / title -->
+    <nav>
+        <div class="mx-auto my-5 text-center">
+            <blockquote class="blockquote">
+                <h1>Multiplication Table</h1>
+            </blockquote>
+            <figcaption class="blockquote-footer">By: Theodor Farag</figcaption>
+        </div>
+    </nav>
+
+    <!-- Main container for table + form -->
+    <div class="container my-4 mh">
+        <div class="row g-4 align-items-start">
+            <!-- Left: input form (mobile full-width, medium 4/12) -->
+            <div class="col-12 col-md-4">
+                <div class="card primaryColor rounded-3 p-3">
+                    <h2 class="text-center mb-3">Enter Table Information</h2>
+                    <!-- Form: inputs constrained to -50..50 via HTML attributes; JS performs further validation -->
+                    <form id="tableForm" class="flex">
+                        <label for="minColumn" class="form-label">Minimum Column Value</label>
+                        <input id="minColumn" name="minColumn" type="number" class="form-control" min="-50" max="50" required>
+
+                        <label for="maxColumn" class="form-label mt-2">Maximum Column Value</label>
+                        <input id="maxColumn" name="maxColumn" type="number" class="form-control" min="-50" max="50" required>
+
+                        <label for="minRow" class="form-label mt-2">Minimum Row Value</label>
+                        <input id="minRow" name="minRow" type="number" class="form-control" min="-50" max="50" required>
+
+                        <label for="maxRow" class="form-label mt-2">Maximum Row Value</label>
+                        <input id="maxRow" name="maxRow" type="number" class="form-control"min="-50" max="50" required>
+
+                        <!-- Submit triggers JS rendering; button kept as bootstrap primary for consistent look -->
+                        <button type="submit" class="btn btn-primary w-100 mt-3 mx-auto">Make Custom Multiplication Table</button>
+                    </form>
+
+                    <!-- Inline error message element: hidden by default, shown by JS when validation fails -->
+                    <div id="errorMsg" class="alert alert-danger mt-3 d-none" role="alert"></div>
+                </div>
+            </div>
+            <!-- Right: table display (mobile full-width, medium 8/12) -->
+            <div class="col-12 col-md-8">
+                <div id="tableContainer" class="table-responsive">
+                    <!-- Table is populated by `app.js`. Thead and tbody are targeted by ID. -->
+                    <table class="table table-striped text-center">
+                        <thead>
+                            <tr id="thead"></tr>
+                        </thead>
+                        <tbody id="tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- Project script: handles input validation and table rendering -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <!-- jQuery Validation plugin -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <script src="./app.js"></script>
+    <!-- Bootstrap JS (optional for components) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

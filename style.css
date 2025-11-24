@@ -1,0 +1,84 @@
+/*
+  Author: Theodor Farag
+  Username: theodorfarag
+  Contact: theodor_farag@student.uml.edu
+  Date: 2025-10-11
+*/
+body {
+    background: #1E2938;
+    color: white;
+}
+
+/* Utility: center content vertically/horizontally in a column */
+.center {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Utility: simple vertical flex column for stacked inputs/elements */
+.flex {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Card / primary container styling used for the form panel */
+.primaryColor {
+    background: #111827;
+    background-color: #111827;
+    border: 2px #323a4b solid;
+    border-radius: 10px;
+    color: rgb(194, 193, 193);
+}
+
+
+/* Helper to hide elements (kept for compatibility) */
+.hidden {
+    display: none;
+}
+
+/* Horizontal overflow utility (for manual use) */
+.overFlow {
+    overflow-x: scroll;
+}
+
+/* Styling for a custom submit-like button (not the Bootstrap button) */
+.submitButt {
+    color:white;
+    background: #212121;
+    width: fit-content;
+    border-radius: 15px;
+    border: 2px #373737 solid;
+}
+
+/* Table container: limit vertical height and enable scrolling for tall tables */
+#tableContainer {
+  max-height: 75vh;
+  scrollbar-color: #cacaca #212121;
+}
+
+/* Sticky first column for row headers: keeps the row label visible when horizontally scrolling */
+tbody#tbody tr > th {
+  position: sticky;
+  left: 0; /* Sticks to the left of the scroll container */
+  background-color: #111827;
+  color: #d1d5db;
+  z-index: 1; /* Ensure first column sits above table cells */
+  border: none;
+}
+
+/* Sticky header row: keeps column labels visible when vertically scrolling */
+tr#thead > th {
+    position: sticky;
+    top: 0;
+    background-color: #111827;
+    color: #d1d5db;
+    z-index: 2; /* Ensure header sits above table cells */
+}
+
+/* Top-left corner cell (intersection of sticky header & first column) should be highest z-index */
+tr#thead > th:first-child {
+    left: 0;
+    z-index: 3; /* Above both header row and first column */
+}
+
