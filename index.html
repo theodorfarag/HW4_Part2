@@ -19,6 +19,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Project stylesheet (colors, sticky headers, utilities) -->
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     <!-- End head -->
 </head>
 <body>
@@ -40,20 +43,27 @@
                 <div class="card primaryColor rounded-3 p-3">
                     <h2 class="text-center mb-3">Enter Table Information</h2>
                     <!-- Form: inputs constrained to -50..50 via HTML attributes; JS performs further validation -->
-                    <form id="tableForm" class="flex">
+                   <form id="tableForm" class="flex">
                         <label for="minColumn" class="form-label">Minimum Column Value</label>
-                        <input id="minColumn" name="minColumn" type="number" class="form-control" min="-50" max="50" required>
+                        <div id="minColumnSlider" class="my-2"></div>
+                        <input id="minColumnDisplay" class="form-control mb-1" readonly>
+                        <input id="minColumn" name="minColumn" type="hidden" value="-5">
 
                         <label for="maxColumn" class="form-label mt-2">Maximum Column Value</label>
-                        <input id="maxColumn" name="maxColumn" type="number" class="form-control" min="-50" max="50" required>
+                        <div id="maxColumnSlider" class="my-2"></div>
+                        <input id="maxColumnDisplay" class="form-control mb-1" readonly>
+                        <input id="maxColumn" name="maxColumn" type="hidden" value="5">
 
                         <label for="minRow" class="form-label mt-2">Minimum Row Value</label>
-                        <input id="minRow" name="minRow" type="number" class="form-control" min="-50" max="50" required>
+                        <div id="minRowSlider" class="my-2"></div>
+                        <input id="minRowDisplay" class="form-control mb-1" readonly>
+                        <input id="minRow" name="minRow" type="hidden" value="-5">
 
                         <label for="maxRow" class="form-label mt-2">Maximum Row Value</label>
-                        <input id="maxRow" name="maxRow" type="number" class="form-control"min="-50" max="50" required>
+                        <div id="maxRowSlider" class="my-2"></div>
+                        <input id="maxRowDisplay" class="form-control mb-1" readonly>
+                        <input id="maxRow" name="maxRow" type="hidden" value="5">
 
-                        <!-- Submit triggers JS rendering; button kept as bootstrap primary for consistent look -->
                         <button type="submit" class="btn btn-primary w-100 mt-3 mx-auto">Make Custom Multiplication Table</button>
                     </form>
 
@@ -76,8 +86,6 @@
 
         </div>
     </div>
-    <!-- Project script: handles input validation and table rendering -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- jQuery Validation plugin -->
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
     <script src="./app.js"></script>

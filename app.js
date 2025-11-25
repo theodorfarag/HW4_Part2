@@ -13,7 +13,29 @@ $(document).ready(function () {
   const minRow = $("#minRow");
   const maxRow = $("#maxRow");
 
+ function makeSlider(sliderId, displayId, hiddenId, initial) {
+    $("#" + sliderId).slider({
+      min: -50,
+      max: 50,
+      value: initial,
+      slide: function (_e, ui) {
+        $("#" + displayId).val(ui.value);
+        $("#" + hiddenId).val(ui.value).trigger("change");
+      },
+      change: function (_e, ui) {
+        $("#" + displayId).val(ui.value);
+        $("#" + hiddenId).val(ui.value).trigger("change");
+      },
+    });
+    const val = $("#" + sliderId).slider("value");
+    $("#" + displayId).val(val);
+    $("#" + hiddenId).val(val);
+  }
 
+  makeSlider("minColumnSlider", "minColumnDisplay", "minColumn", 0);
+  makeSlider("maxColumnSlider", "maxColumnDisplay", "maxColumn", 0);
+  makeSlider("minRowSlider", "minRowDisplay", "minRow", 0);
+  makeSlider("maxRowSlider", "maxRowDisplay", "maxRow", 0);
   // Renders the multiplication table into the DOM.
   // Parameters are numbers (min/max for columns and rows).
   function renderTable(minCol, minRow, maxCol, maxRow) {
@@ -68,10 +90,35 @@ $(document).ready(function () {
     },
     "This value must be greater than or equal to the related minimum value."
   );
+  $.validator.addMethod(
+    "lteField",
+    function (value, element, param) {
+      if (value === undefined || value === null || value === "") return false;
+      const current = Number(value);
+      const other = Number($(param).val());
+      if (isNaN(current) || isNaN(other)) return false;
+      return current <= other;
+    },
+    "This value must be less than or equal to the related maximum value."
+  );
   // Jquery validate function that validates the forms input
   $("#tableForm").validate({
+     // we need to validate hidden inputs because sliders write to hidden fields
+    ignore: [],
+    // validate as the user moves the sliders / interacts
+    onkeyup: function (element) {
+      $(element).valid();
+    },
+    onfocusout: function (element) {
+      $(element).valid();
+    },
     rules: {
-      minColumn: { required: true, number: true, min: -50, max: 50 },
+      minColumn: { required: true,
+        number: true,
+        min: -50,
+        max: 50,
+        lteField: "#maxColumn"
+      },
       maxColumn: {
         required: true,
         number: true,
@@ -79,7 +126,12 @@ $(document).ready(function () {
         max: 50,
         gteField: "#minColumn",
       },
-      minRow: { required: true, number: true, min: -50, max: 50 },
+      minRow: { required: true,
+        number: true,
+        min: -50,
+        max: 50,
+        lteField: "#maxRow"
+      },
       maxRow: {
         required: true,
         number: true,
@@ -94,6 +146,7 @@ $(document).ready(function () {
         number: "Please enter a valid number.",
         min: "Minimum allowed is -50.",
         max: "Maximum allowed is 50.",
+        lteField: "Minimum column must be less than or equal to Maximum column."
       },
       maxColumn: {
         required: "Please enter a maximum column value.",
@@ -108,6 +161,7 @@ $(document).ready(function () {
         number: "Please enter a valid number.",
         min: "Minimum allowed is -50.",
         max: "Maximum allowed is 50.",
+        lteField: "Minimum row must be less than or equal to Maximum row."
       },
       maxRow: {
         required: "Please enter a maximum row value.",
@@ -120,17 +174,36 @@ $(document).ready(function () {
     errorClass: "is-invalid",
     validClass: "is-valid",
     errorPlacement: function (error, element) {
-      // Place the error message right after the input (Bootstrap-friendly)
+     // Place the error message right after the input (Bootstrap-friendly)
+     error.addClass("invalid-feedback");
+      if (element.next(".invalid-feedback").length === 0) {
+        element.after(error);
+      }
+      // Place error after visible display when the input is hidden (slider -> hidden input)
       error.addClass("invalid-feedback");
+      if (element.is(":hidden")) {
+        const display = $("#" + element.attr("id") + "Display");
+        if (display.length) {
+          if (display.next(".invalid-feedback").length === 0) display.after(error);
+          return;
+        }
+      }
       if (element.next(".invalid-feedback").length === 0) {
         element.after(error);
       }
     },
     highlight: function (element) {
       $(element).addClass("is-invalid").removeClass("is-valid");
+      // highlight visible display for hidden fields (so slider shows invalid state)
+      const $el = $(element).is(":hidden") ? $("#" + $(element).attr("id") + "Display") : $(element);
+      $el.addClass("is-invalid").removeClass("is-valid");
     },
     unhighlight: function (element) {
       $(element).removeClass("is-invalid").addClass("is-valid");
+      // remove any inline alert error message if present
+      $("#errorMsg").addClass("d-none").text("");
+      const $el = $(element).is(":hidden") ? $("#" + $(element).attr("id") + "Display") : $(element);
+      $el.removeClass("is-invalid").addClass("is-valid");
       // remove any inline alert error message if present
       $("#errorMsg").addClass("d-none").text("");
     },
