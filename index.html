@@ -25,7 +25,7 @@
     <!-- End head -->
 </head>
 <body>
-    <!-- Page header / title -->
+    <!-- Page header / title: Shows the main heading and author -->
     <nav>
         <div class="mx-auto my-5 text-center">
             <blockquote class="blockquote">
@@ -35,27 +35,32 @@
         </div>
     </nav>
 
-    <!-- Main container for table + form -->
+    <!-- Main container for table + form and tabs -->
     <div class="container my-4 mh">
         <div class="row g-4 align-items-start">
             <!-- Left: input form (mobile full-width, medium 4/12) -->
             <div class="col-12 col-md-4">
+                <!-- Card for the input form -->
                 <div class="card primaryColor rounded-3 p-3">
                     <h2 class="text-center mb-3">Enter Table Information</h2>
                     <!-- Form: inputs constrained to -50..50 via HTML attributes; JS performs further validation -->
                    <form id="tableForm" class="flex" action="#" method="post" autocomplete="off">
+                        <!-- Minimum Column input and slider -->
                         <label for="minColumn" class="form-label">Minimum Column Value</label>
                         <div id="minColumnSlider" class="my-2"></div>
                         <input id="minColumn" name="minColumn" class="form-control mb-1" type="number" min="-50" max="50" >
 
+                        <!-- Maximum Column input and slider -->
                         <label for="maxColumn" class="form-label mt-2">Maximum Column Value</label>
                         <div id="maxColumnSlider" class="my-2"></div>
                         <input id="maxColumn" name="maxColumn" class="form-control mb-1" type="number" min="-50" max="50" >
 
+                        <!-- Minimum Row input and slider -->
                         <label for="minRow" class="form-label mt-2">Minimum Row Value</label>
                         <div id="minRowSlider" class="my-2"></div>
                         <input id="minRow" name="minRow" class="form-control mb-1" type="number" min="-50" max="50" >
 
+                        <!-- Maximum Row input and slider -->
                         <label for="maxRow" class="form-label mt-2">Maximum Row Value</label>
                         <div id="maxRowSlider" class="my-2"></div>
                         <input id="maxRow" name="maxRow" class="form-control mb-1" type="number" min="-50" max="50" >
@@ -66,12 +71,15 @@
                     <div id="errorMsg" class="alert alert-danger mt-3 d-none" role="alert"></div>
                 </div>
             </div>
+                <!-- Right: Edit Tabs section for checkboxes and delete buttons -->
                 <div id="editTabs"class="col-12 col-md-8">
                     <div class="card primaryColor rounded-3 p-3">
                         <h2 class="text-center mb-3 text-white">Edit Tabs</h2>
+                            <!-- Dynamic list of checkboxes for each table tab -->
                             <div class="block text-center"  id="table-checkbox-list">
 
                             </div>
+                        <!-- Delete all and delete selected buttons -->
                         <div class="flex-col text-center">
                             <button id="delete-all" type="submit" class="btn btn-primary w-fit mt-3">Delete All</button>
                             <button id="delete-selected" type="submit" class="btn btn-primary w-fit mt-3 ms-3">Delect The Selected Ones</button>
@@ -80,8 +88,9 @@
 
                 </div>
 
-            <!-- Right: table display (mobile full-width, medium 8/12) -->
+            <!-- Tabs container: holds all generated table tabs -->
             <div id="tabs" class="col-12 primaryColor hidden">
+                   <!-- List of tab headers -->
                    <ul id="tabs-list"></ul>
                 </div>
             </div>
@@ -89,6 +98,7 @@
     </div>
     <!-- jQuery Validation plugin -->
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+    <!-- Main application JS -->
     <script src="./app.js"></script>
     <!-- Bootstrap JS (optional for components) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
