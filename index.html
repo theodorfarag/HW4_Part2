@@ -43,47 +43,48 @@
                 <div class="card primaryColor rounded-3 p-3">
                     <h2 class="text-center mb-3">Enter Table Information</h2>
                     <!-- Form: inputs constrained to -50..50 via HTML attributes; JS performs further validation -->
-                   <form id="tableForm" class="flex">
+                   <form id="tableForm" class="flex" action="#" method="post" autocomplete="off">
                         <label for="minColumn" class="form-label">Minimum Column Value</label>
                         <div id="minColumnSlider" class="my-2"></div>
-                        <input id="minColumnDisplay" class="form-control mb-1" readonly>
-                        <input id="minColumn" name="minColumn" type="hidden" value="-5">
+                        <input id="minColumn" name="minColumn" class="form-control mb-1" type="number" min="-50" max="50" >
 
                         <label for="maxColumn" class="form-label mt-2">Maximum Column Value</label>
                         <div id="maxColumnSlider" class="my-2"></div>
-                        <input id="maxColumnDisplay" class="form-control mb-1" readonly>
-                        <input id="maxColumn" name="maxColumn" type="hidden" value="5">
+                        <input id="maxColumn" name="maxColumn" class="form-control mb-1" type="number" min="-50" max="50" >
 
                         <label for="minRow" class="form-label mt-2">Minimum Row Value</label>
                         <div id="minRowSlider" class="my-2"></div>
-                        <input id="minRowDisplay" class="form-control mb-1" readonly>
-                        <input id="minRow" name="minRow" type="hidden" value="-5">
+                        <input id="minRow" name="minRow" class="form-control mb-1" type="number" min="-50" max="50" >
 
                         <label for="maxRow" class="form-label mt-2">Maximum Row Value</label>
                         <div id="maxRowSlider" class="my-2"></div>
-                        <input id="maxRowDisplay" class="form-control mb-1" readonly>
-                        <input id="maxRow" name="maxRow" type="hidden" value="5">
+                        <input id="maxRow" name="maxRow" class="form-control mb-1" type="number" min="-50" max="50" >
 
-                        <button type="submit" class="btn btn-primary w-100 mt-3 mx-auto">Make Custom Multiplication Table</button>
                     </form>
 
                     <!-- Inline error message element: hidden by default, shown by JS when validation fails -->
                     <div id="errorMsg" class="alert alert-danger mt-3 d-none" role="alert"></div>
                 </div>
             </div>
+                <div id="editTabs"class="col-12 col-md-8">
+                    <div class="card primaryColor rounded-3 p-3">
+                        <h2 class="text-center mb-3 text-white">Edit Tabs</h2>
+                            <div class="block text-center"  id="table-checkbox-list">
+
+                            </div>
+                        <div class="flex-col text-center">
+                            <button id="delete-all" type="submit" class="btn btn-primary w-fit mt-3">Delete All</button>
+                            <button id="delete-selected" type="submit" class="btn btn-primary w-fit mt-3 ms-3">Delect The Selected Ones</button>
+                        </div>
+                    </div>
+
+                </div>
+
             <!-- Right: table display (mobile full-width, medium 8/12) -->
-            <div class="col-12 col-md-8">
-                <div id="tableContainer" class="table-responsive">
-                    <!-- Table is populated by `app.js`. Thead and tbody are targeted by ID. -->
-                    <table class="table table-striped text-center">
-                        <thead>
-                            <tr id="thead"></tr>
-                        </thead>
-                        <tbody id="tbody"></tbody>
-                    </table>
+            <div id="tabs" class="col-12 primaryColor hidden">
+                   <ul id="tabs-list"></ul>
                 </div>
             </div>
-
         </div>
     </div>
     <!-- jQuery Validation plugin -->

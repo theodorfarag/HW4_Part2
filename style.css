@@ -14,12 +14,16 @@ body {
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
 }
 
 /* Utility: simple vertical flex column for stacked inputs/elements */
 .flex {
     display: flex;
     flex-direction: column;
+}
+.block {
+    display: block;
 }
 
 /* Card / primary container styling used for the form panel */
@@ -28,10 +32,13 @@ body {
     background-color: #111827;
     border: 2px #323a4b solid;
     border-radius: 10px;
-    color: rgb(194, 193, 193);
+    color:white;
 }
 
-
+.ui-tabs-panel {
+    background: #111827;
+    background-color: #111827;
+}
 /* Helper to hide elements (kept for compatibility) */
 .hidden {
     display: none;
@@ -82,3 +89,26 @@ tr#thead > th:first-child {
     z-index: 3; /* Above both header row and first column */
 }
 
+.ui-slider .ui-slider-handle {
+  background: #2563eb;
+  border: 2px solid #93c5fd;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.ui-slider .ui-slider-handle:hover,
+.ui-slider .ui-slider-handle:focus {
+  background: #60a5fa;
+  border-color: #2563eb;
+}
+
+.ui-slider-range {
+  background: #2563eb;
+  border-radius: 8px;
+}
+
+/* Optional: Add spacing below sliders */
+.slider-container {
+  margin-bottom: 1.5em;
+}
